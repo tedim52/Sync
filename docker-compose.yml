@@ -2,5 +2,9 @@ version: '3'
 services:
   demo:
     image: tedim52/Sync
+    env_file:
+        - secrets.env
     ports:
         - "80:5000"
+    volumes:
+        - /home/tbm42/spotify.db:/usr/app/spotify.db
