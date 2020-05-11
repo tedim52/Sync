@@ -1,6 +1,7 @@
 Welcome to Sync
 
-IP address: http://34.86.244.61/
+ip address: http://34.86.244.61/
+github link: https://github.com/tedim52/Sync/
 
 Imagine these two scenarios.
 
