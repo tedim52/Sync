@@ -1,5 +1,7 @@
 Welcome to Sync
 
+IP address: http://34.86.244.61/
+
 Imagine these two scenarios.
 
 Scenario one: you’re in a car with a friend and you’re the one playing the music. You’re nervous that your friend won’t like the song that you’re about to play.
