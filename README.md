@@ -1,5 +1,8 @@
 Welcome to Sync
 
+Created by Tedi Mitiku
+Backend Design Final Project Spring 2020
+
 ip address: http://34.86.244.61/
 
 Imagine these two scenarios:
