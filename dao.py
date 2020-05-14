@@ -36,6 +36,7 @@ def send_email(receiver, spotify_username, sync):
 
 
 def stringify_songs(playlist_id):
+    """Takes in the spotify id of a playlist and returns the songs as a string seperated by a ';'. """
     songs = ""
     songs_list = sp.playlist_tracks(playlist_id).get("items")
     for song in songs_list:
@@ -47,6 +48,7 @@ def stringify_songs(playlist_id):
 
 
 def stringify_sync(playlist_list):
+    """Takes in a list of song names and returns them as a string seperated by a ';'. """
     songs = ""
     songs_list = playlist_list
     for song in songs_list:
@@ -55,6 +57,11 @@ def stringify_sync(playlist_list):
 
 
 def sync(playlist_one, playlist_two):
+    """ Creates sync of two playlist.
+
+        Takes in two lists of song names and returns a list
+        of songs that appear in both playlists.
+    """
     temp = set(playlist_two)
     lst3 = [song for song in playlist_one if song in temp]
     no_dups_lst3 = set(lst3)
