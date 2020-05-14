@@ -4,7 +4,11 @@ Created by Tedi Mitiku,
 Backend Design Final Project Spring 2020
 
 ip address: http://34.86.244.61/
+
+
 Link to API Spec on SwaggerHub: https://app.swaggerhub.com/apis/tedim52/Sync/1.0.0
+
+
 Imagine these two scenarios:
 
 Scenario one: you’re in a car with a friend and you’re the one playing the music. You’re nervous that your friend won’t like the song that you’re about to play.
