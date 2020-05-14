@@ -5,11 +5,14 @@ info:
   description: Sync utilizes Spotify’s Web API to get information about public playlists that you and your friends listen to. Sync then creates a synced playlist that contains overlapping music from you and your friends’ playlists. As an added feature, Sync will email the synced playlist to you and your friends so you can save your sync to Spotify.
 
 
-    Note, the api prompts users to input spotify usernames and playlist ids. These can be retrieved from www.open.spotify.com and navigating to a users profile or a playlist page. You can then retrieve the username of the user or id of the playlist by copying very end of the end point. Ex. https://open.spotify.com/playlist/37i9dQZF1DWWBHeXOYZf74 is a page for the POLLEN playlist and 37i9dQZF1DWWBHeXOYZf74 is the playlist id. '
+    Note that the api prompts users to input spotify usernames and playlist ids. These can be retrieved from www.open.spotify.com by navigating to a users profile or a playlist page. You can then retrieve the uri of the user or id of the playlist by copying very end of the end point. Ex. https://open.spotify.com/playlist/37i9dQZF1DWWBHeXOYZf74 is a page for the POLLEN playlist and 37i9dQZF1DWWBHeXOYZf74 is the playlist id.
   contact:
     name: Tedi Mitiku
     url: https://github.com/tedim52/Sync
     email: tbm42@cornell.edu
+servers:
+  - url: http://34.86.244.61/
+    description: Dev Server
 paths:
   /api/users/:
     post:
