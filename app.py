@@ -72,7 +72,7 @@ def delete_user(username):
     return success_response(user)
 
 
-@app.route("/api/users/<username>/", methods=["POST"])
+@app.route("/api/playlists/<username>/", methods=["POST"])
 def add_playlist_user(username):
     body = json.loads(request.data)
     user = dao.get_user(username)
@@ -99,12 +99,8 @@ def create_sync():
     return success_response(sync)
 
 
-@app.route("/api/syncs/", methods=["GET"])
-def get_sync():
-    body = json.loads(request.data)
-    user_one = body.get("user_one")
-    user_two = body.get("user_two")
-
+@app.route("/api/syncs/<user_one>/<user_two>/", methods=["GET"])
+def get_sync(user_one, user_two):
     if dao.get_user(user_one) is None:
         return failure_response("User one not saved.")
     if dao.get_user(user_two) is None:
@@ -113,7 +109,7 @@ def get_sync():
     sync = dao.get_sync(user_one, user_two)
     if sync is None:
         return failure_response("Sync not saved.")
-    return success_response(sync)
+    return success_response(sync, 406)
 
 
 if __name__ == "__main__":

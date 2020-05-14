@@ -1,0 +1,292 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Sync Web API'
+  description: Sync utilizes Spotify’s Web API to get information about public playlists that you and your friends listen to. Sync then creates a synced playlist that contains overlapping music from you and your friends’ playlists. As an added feature, Sync will email the synced playlist to you and your friends so you can save your sync to Spotify.
+
+
+    Note, the api prompts users to input spotify usernames and playlist ids. These can be retrieved from www.open.spotify.com and navigating to a users profile or a playlist page. You can then retrieve the username of the user or id of the playlist by copying very end of the end point. Ex. https://open.spotify.com/playlist/37i9dQZF1DWWBHeXOYZf74 is a page for the POLLEN playlist and 37i9dQZF1DWWBHeXOYZf74 is the playlist id. '
+  contact:
+    name: Tedi Mitiku
+    url: https://github.com/tedim52/Sync
+    email: tbm42@cornell.edu
+paths:
+  /api/users/:
+    post:
+      description: Creates a user profile containing users spotify data.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+            example:
+              username: spotify uri ex. tedi.m52
+              email: email address ex. tbm42@cornell.edu
+      responses:
+        200:
+          description: Successful retrieval of spotiy user info.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "username":"username",
+                      "email":"email",
+                      "playlists":[<PLAYLIST>,<PLAYLIST>,...],
+                      "syncs":[]
+                  }
+        404:
+          description: No spotify account with given spotify username.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "No Spotify account with given username."
+                  }
+  /api/users/<username>/:
+    get:
+      description: Creates a user profile containing users spotify data.
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: Spotify username of a saved user.
+          example: tedi.m52
+      responses:
+        200:
+          description: Successful retrieval of spotiy user info.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "username":"username",
+                      "email":"email",
+                      "playlists":[<PLAYLIST>,<PLAYLIST>,...],
+                      "syncs":[]
+                  }
+        404:
+          description: Users profile not found
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "Username not saved. Create user first."
+                  }
+    delete:
+      description: Deletes a saved users profile.
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: Spotify username of a saved user.
+          example: tedi.m52
+      responses:
+        200:
+          description: Successful deletion of spotiy user profile.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "username":"username",
+                      "email":"email",
+                      "playlists":[<PLAYLIST>,<PLAYLIST>,...],
+                      "syncs":[]
+                  }
+        404:
+          description: Users profile not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "Username not saved."
+                  }
+  /api/playlists/<username>/:
+    post:
+      description: Adds a public spotify playlist to a users profile.
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: Spotify username of a saved user.
+          example: tedi.m52
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+            example:
+              name: "name of spotify playlist ex. POLLEN"
+              playlist: "spotify playlist id ex. 37i9dQZF1DWWBHeXOYZf74"
+      responses:
+        200:
+          description: Successful retrieval of spotiy user info.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "username":"username",
+                      "email":"email",
+                      "playlists":[<PLAYLIST>,<PLAYLIST>,...,<ADDED PLAYLIST>],
+                      "syncs":[]
+                  }
+        404:
+          description: Users profile not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "Username not saved."
+                  }
+  /api/syncs/:
+    post:
+      description: Creates a synced between two users containing overlapping songs from their respective playlists.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+            example:
+              user_one: "spotify username ex. tedi.m52"
+              user_two:: "spotify username ex. 6wkaxax29ty3f2z2eyappmk13"
+      responses:
+        200:
+          description: Successful creation of synced playlist for user_one and user_two.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "users":[{"username":"tedi.m52", "email"},{"username":"6wkaxax29ty3f2z2eyappmk13", "email"}],
+                      "synced_playlist":[<SONG>,<SONG>,...],
+                  }
+        404:
+          description: One of the users profile were not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "User one not saved."
+                  }
+
+  /api/syncs/<user_one>/<user_two>/:
+    get:
+      description: Retrieves the saved sync between user one and user two.
+      parameters:
+        - in: path
+          name: user_one
+          schema:
+            type: string
+          required: true
+          description: Spotify username of a saved user.
+          example: "tedi.m52"
+        - in: path
+          name: user_two
+          schema:
+            type: string
+          required: true
+          description: Spotify username of a saved user.
+          example: "6wkaxax29ty3f2z2eyappmk13"
+      responses:
+        200:
+          description: Successful retrieval of synced playlist for user_one and user_two.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: True
+                  data: {
+                      "users":[{"username":"tedi.m52", "email"},{"username":"6wkaxax29ty3f2z2eyappmk13", "email"}],
+                      "synced_playlist":[<SONG>,<SONG>,...],
+                  }
+        404:
+          description: One of the users profile were not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "User one not saved."
+                  }
+        406:
+          description: Sync between user_one and user_two not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  success: False
+                  data: {
+                    "error": "Sync not saved."
+                  }

@@ -39,7 +39,10 @@ def stringify_songs(playlist_id):
     songs = ""
     songs_list = sp.playlist_tracks(playlist_id).get("items")
     for song in songs_list:
-        songs += song.get("track").get("name") + ";"
+        if song.get("track") is None:
+            songs += ";"
+        else:
+            songs += song.get("track").get("name") + ";"
     return songs[:-1]
 
 
