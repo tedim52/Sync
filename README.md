@@ -3,9 +3,6 @@
 ### Created by Tedi Mitiku,
 Backend Design Final Project Spring 2020
 
-**Received Best Overall Backend Award from Cornell AppDev 
-https://backend-course.cornellappdev.com/final-project-winners**
-
 Link to API Spec on SwaggerHub: https://app.swaggerhub.com/apis/tedim52/Sync/1.0.0
 
 Imagine these two scenarios:
@@ -19,3 +16,6 @@ Wouldn’t it be nice to have a playlist that combines music that everyone will 
 Sync utilizes Spotify’s Web API to get information about public playlists that you and your friends listen to. Sync then creates a synced playlist that contains overlapping music from you and your friends’ playlists. As an added feature, Sync will email the synced playlist to you and your friends so you can save your sync to Spotify.
 
 Thank you to Cornell AppDev for an amazing hands on introduction to Backend Development :)
+
+**Received Best Overall Backend Award from Cornell AppDev 
+https://backend-course.cornellappdev.com/final-project-winners**
